@@ -23,6 +23,10 @@ Book.prototype.info = function() {
      ${this.read ? "You have read it." : "You have not read it yet." } `
     };
 
+    Book.prototype = function() {
+        this.read = !this.read;
+    };
+
 addBookToLibrary(
     "1984", 
     "George Orwell", 
@@ -61,3 +65,29 @@ function createBookCard(book) {
     
       document.body.appendChild(card);
 }
+
+const newBookBtn = document.getElementById("new-book-btn");
+const bookForm = document.getElementById("book-form");
+
+newBookBtn.addEventListener("click", () => {
+    bookForm.style.display = "block";
+});
+
+bookForm .addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const title = document.getElementById("title").value;
+    const author = document.getElementById("author").value;
+    const pages = parseInt(document.getElementById("pages").value);
+    const read = document.getElementById("read").checked;
+    const imageURL = document.getElementById("imageURL").value;
+
+    const newBook = addBookToLibrary(title, author, pages, read, imageURL);
+
+    createBookCard(newBook);
+
+    bookForm.reset();
+    bookForm.style.display = "none";
+});
+
+ 
