@@ -282,9 +282,8 @@ myLibrary.forEach(book => createBookCard(book));
 function createBookCard(book) {
     const card = document.createElement("div");
     card.classList.add("book-card");
-
     card.dataset.id = book.id;
-
+  
     const img = document.createElement("img");
     img.src = book.imageURL;
     img.alt = book.title;
@@ -304,38 +303,44 @@ function createBookCard(book) {
 
     const read = document.createElement("p");
     read.textContent = book.read ? "You have read it" : "You have not read it yet";
+    read.className = book.read ? "read" : "unread";
     card.appendChild(read);
 
      const toggleBtn = document.createElement("button");
- toggleBtn.textContent = "Toggle Read";
- card.appendChild(toggleBtn);
-
- toggleBtn.addEventListener("click", () => {
-    const id = card.dataset.id;
-    const book = myLibrary.find(book => book.id === id);
-
-    book.toggleRead();
-
-    read.textContent = book.read ? "You have read it" : "You have not read it";
-    read.className = book.read ? "read" : "unread";
-});
+     toggleBtn.textContent = "Toggle Read";
+     toggleBtn.classList.add("toggle-btn");
 
     const removeBtn = document.createElement("button");
     removeBtn.textContent = "Remove";
-    card.appendChild(removeBtn);
+    removeBtn.classList.add("remove-btn");
+
+const buttonGroup = document.createElement("div");
+buttonGroup.classList.add("button-group");
+buttonGroup.appendChild(toggleBtn);
+buttonGroup.appendChild(removeBtn);
+card.appendChild(buttonGroup);
+
+ toggleBtn.addEventListener("click", () => {
+    book.toggleRead();
+    read.textContent = book.read ? "You have read it" : "You have not read it";
+    read.className = book.read ? "read" : "unread";
+    /*const id = card.dataset.id;
+    const book = myLibrary.find(book => book.id === id);*/
+
+});
 
     removeBtn.addEventListener("click", () => {
-        const id = card.dataset.id;
-    
-
-    const index = myLibrary.findIndex(book => book.id === id);
+        //const id = card.dataset.id;
+    const index = myLibrary.findIndex(b => b.id === book.id);
     if (index !== -1){
         myLibrary.splice(index, 1);
+        card.remove();
     }
-     card.remove();
+     
     });
 
-      document.body.appendChild(card);
+     const library = document.getElementById("library");
+     library.appendChild(card);
 }
 
 const newBookBtn = document.getElementById("new-book-btn");
