@@ -324,17 +324,22 @@ card.appendChild(buttonGroup);
     book.toggleRead();
     read.textContent = book.read ? "You have read it" : "You have not read it";
     read.className = book.read ? "read" : "unread";
-    /*const id = card.dataset.id;
-    const book = myLibrary.find(book => book.id === id);*/
 
 });
 
     removeBtn.addEventListener("click", () => {
-        //const id = card.dataset.id;
+     const confirmed = confirm(
+        "Are you sure you want to remove this book? This action will remove it entirely from your browser."
+     );
+     if(confirmed){
     const index = myLibrary.findIndex(b => b.id === book.id);
     if (index !== -1){
         myLibrary.splice(index, 1);
         card.remove();
+        showToast("Book removed!")
+    }
+    } else {
+       showToast("Book removal canceled");
     }
      
     });
@@ -347,7 +352,11 @@ const newBookBtn = document.getElementById("new-book-btn");
 const bookForm = document.getElementById("book-form");
 
 newBookBtn.addEventListener("click", () => {
-    bookForm.style.display = "block";
+    if(bookForm.style.display === "block") {
+        bookForm.style.display = "none";
+    } else {
+        bookForm.style.display = "block";
+    }
 });
 
 bookForm .addEventListener("submit", function(e) {
@@ -365,5 +374,17 @@ bookForm .addEventListener("submit", function(e) {
 
     bookForm.reset();
     bookForm.style.display = "none";
+    showToast("Book added succesfully!");
 });
+
+function showToast(message) {
+    const toast = document.getElementById("toast");
+    toast.textContent= message;
+    toast.style.display = "block";
+    setTimeout(() => {
+        toast.style.display = "none";
+    }, 2000);
+}
+
+
 

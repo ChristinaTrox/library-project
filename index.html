@@ -7,16 +7,34 @@
      <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div id="toast" class="toast"></div>
     <h1>My Library</h1>
-    <button id="new-book-btn">New Book</button>
+    <div class="form-container">
+    <button id="new-book-btn">New Book
+    <img src="book-absolute.png" class="book" alt="book image"></button>
     <form id="book-form" style="display: none;">
-    <label>Title: <input type="text" id="title" required></label><br>
-    <label>Author: <input type="text" id="author" required></label><br>
-    <label>Pages: <input type="number" id="pages" required></label><br>
-    <label>Read: <input type="checkbox" id="read"></label><br>
-    <label>Image URL: <input type="text" id="imageURL"></label><br>
-    <button type="submit">Add Book</button>
-</form>
+        <div class="form-row">
+    <label for="title">Title:</label> 
+    <input type="text" id="title" required></div>
+
+    <div class="form-row">
+    <label for="author">Author:</label> 
+    <input type="text" id="author" required></div>
+
+    <div class="form-row">
+    <label for="pages">Pages:</label>
+    <input type="number" id="pages" required></div>
+
+    <div class="form-row">
+    <label for="read">Read:</label> 
+    <input type="checkbox" id="read"></div>
+
+    <div class="form-row">
+    <label for="imageURL">Image URL:</label>
+    <input type="text" id="imageURL"></div>
+
+    <button type="submit" class="add">Add Book</button>
+</form></div>
 
    <div id="library"></div>
 
