@@ -285,8 +285,11 @@ function createBookCard(book) {
     card.dataset.id = book.id;
   
     const img = document.createElement("img");
-    img.src = book.imageURL;
+    img.src = book.imageURL || "book-default.jpg";
     img.alt = book.title;
+    img.onerror = () => {
+        img.src = "book-default.jpg";
+    };
     card.appendChild(img);
 
     const title = document.createElement("h3");
@@ -310,6 +313,19 @@ function createBookCard(book) {
      toggleBtn.textContent = "Toggle Read";
      toggleBtn.classList.add("toggle-btn");
 
+     const editImgBtn = document.createElement("button");
+     editImgBtn.textContent = "Edit Image";
+     editImgBtn.classList.add("toggle-btn");
+     
+     editImgBtn.addEventListener("click", () => {
+    const newUrl = prompt("Enter image Url for this book:");
+
+    if(!newUrl) return;
+
+    book.imageURL = newUrl;
+    img.src = newUrl;
+});
+
     const removeBtn = document.createElement("button");
     removeBtn.textContent = "Remove";
     removeBtn.classList.add("remove-btn");
@@ -317,6 +333,7 @@ function createBookCard(book) {
 const buttonGroup = document.createElement("div");
 buttonGroup.classList.add("button-group");
 buttonGroup.appendChild(toggleBtn);
+buttonGroup.appendChild(editImgBtn);
 buttonGroup.appendChild(removeBtn);
 card.appendChild(buttonGroup);
 
@@ -362,11 +379,11 @@ newBookBtn.addEventListener("click", () => {
 bookForm .addEventListener("submit", function(e) {
     e.preventDefault();
 
-    const title = document.getElementById("title").value;
-    const author = document.getElementById("author").value;
+    const title = document.getElementById("title").value.trim();
+    const author = document.getElementById("author").value.trim();
     const pages = parseInt(document.getElementById("pages").value);
     const read = document.getElementById("read").checked;
-    const imageURL = document.getElementById("imageURL").value;
+    const imageURL = document.getElementById("imageURL").value.trim();
 
     const newBook = addBookToLibrary(title, author, pages, read, imageURL);
 
@@ -374,7 +391,7 @@ bookForm .addEventListener("submit", function(e) {
 
     bookForm.reset();
     bookForm.style.display = "none";
-    showToast("Book added succesfully!");
+    showToast("Book added successfully!");
 });
 
 function showToast(message) {
@@ -385,6 +402,10 @@ function showToast(message) {
         toast.style.display = "none";
     }, 2000);
 }
+
+document.getElementById("toast").addEventListener("click" , () => {
+    document.getElementById("toast").style.display= "none";
+});
 
 
 

@@ -10,7 +10,7 @@
     <div id="toast" class="toast"></div>
     <h1>My Library</h1>
     <div class="form-container">
-    <button id="new-book-btn">New Book
+    <button id="new-book-btn" type="button">New Book
     <img src="book-absolute.png" class="book" alt="book image"></button>
     <form id="book-form" style="display: none;">
         <div class="form-row">
@@ -31,7 +31,9 @@
 
     <div class="form-row">
     <label for="imageURL">Image URL:</label>
-    <input type="text" id="imageURL"></div>
+    <input type="text" id="imageURL">
+     <small class="hint">Optional - adding a cover helps visually</small>
+</div>
 
     <button type="submit" class="add">Add Book</button>
 </form></div>
