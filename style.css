@@ -227,3 +227,39 @@ h1 {
     grid-column: 2;
     font-size: 0.85rem;
 }
+
+.comments-section {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 1rem;
+    background: whitesmoke;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#comment-form input, #comment-form textarea {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+#comment-form button {
+    padding: 0.5rem 1rem;
+    border: none;
+    background-color: #3b82f6;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#comment-form button:hover {
+    background-color: #2563eb;
+}
+
+.comment {
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border-bottom: 1px solid #ddd;
+}

@@ -65,7 +65,7 @@ addBookToLibrary(
     "Aldous Huxley",
     288,
     true,
-    "https://upload.wikimedia.org/wikipedia/en/6/62/BraveNewWorld_FirstEdition.jpg"
+    "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1575509280i/5129.jpg"
 );
 
 addBookToLibrary (
@@ -407,5 +407,28 @@ document.getElementById("toast").addEventListener("click" , () => {
     document.getElementById("toast").style.display= "none";
 });
 
+const commentForm = document.getElementById("comment-form");
+const commentList = document.getElementById("comments-list");
 
+commentForm.addEventListener("submit", (e) => {
+    e.preventDefault();
 
+    const name = document.getElementById("user-name").value.trim();
+    const comment = document.getElementById("user-comment").value.trim();
+
+    if(!name || !comment) return;
+
+    const commentDiv = document.createElement("div");
+    const strong = document.createElement("strong");
+    const p = document.createElement("p");
+
+    strong.textContent = name;
+    p.textContent = comment;
+    
+    commentDiv.classList.add("comment");
+    commentDiv.appendChild(strong);
+    commentDiv.appendChild(p);
+    commentList.appendChild(commentDiv);
+
+    commentForm.reset();
+});
