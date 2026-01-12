@@ -130,25 +130,38 @@ function createBookCard(book) {
     img.src = newUrl;
 });
 
-    const removeBtn = document.createElement("button");
+   /* const removeBtn = document.createElement("button");
     removeBtn.textContent = "Remove";
     removeBtn.classList.add("remove-btn");
+    buttonGroup.appendChild(removeBtn);*/
+
+
+ toggleBtn.addEventListener("click", () => {
+    book.read =!book.read;
+    read.textContent = book.read ? "You have read it" : "You have not read it";
+    read.className = book.read ? "read" : "unread";
+   
+    fetch(`/books/${book.id}`, {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ read: book.read})
+    })
+    .then(res => res.json())
+    .then(updatedBook => {
+        console.log("Book updated on backend:", updatedBook);
+    })
+    .catch(err => console.error("Failed to update book:", err));
+});
 
 const buttonGroup = document.createElement("div");
 buttonGroup.classList.add("button-group");
 buttonGroup.appendChild(toggleBtn);
 buttonGroup.appendChild(editImgBtn);
-buttonGroup.appendChild(removeBtn);
-card.appendChild(buttonGroup);
+card.appendChild(buttonGroup);  
 
- toggleBtn.addEventListener("click", () => {
-    book.toggleRead();
-    read.textContent = book.read ? "You have read it" : "You have not read it";
-    read.className = book.read ? "read" : "unread";
-
-});
-
-    removeBtn.addEventListener("click", () => {
+  /*removeBtn.addEventListener("click", () => {
      const confirmed = confirm(
         "Are you sure you want to remove this book? This action will remove it entirely from your browser."
      );
@@ -164,10 +177,11 @@ card.appendChild(buttonGroup);
        showToast("Book removal canceled");
     }
      
-    });
+    }); */
 
      const library = document.getElementById("library");
      library.appendChild(card);
+     return card;
 }
 
 const newBookBtn = document.getElementById("new-book-btn");

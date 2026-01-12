@@ -278,8 +278,30 @@ const server = http.createServer((req, res) => {
       res.writeHead(201, {"Content-Type": "application/json"});
       res.end(JSON.stringify(newBook));
     });
-    return;
+       return;
   }
+
+    if (req.method === "PATCH" && req.url.startsWith("/books")) {
+      let body = "";
+      const id = req.url.split("/")[2];
+
+      req.on("data", chunk => body += chunk.toString());
+      req.on("end", () => {
+        const update = JSON.parse(body);
+        const book = books.find(b => b.id === id);
+
+        if(!book) {
+          res.writeHead(404, {"Content-Type": "application/json"});
+          res.end(JSON.stringify({ error: "Book not found"}));
+          return;
+        }
+        if (update.read !== undefined) book.read = update.read;
+        res.writeHead(200, {"Content-Type": "application/json"});
+        res.end(JSON.stringify(book));
+      });
+      return;
+    }
+ 
 
   const filePath = req.url === "/" ? "./index.html" : `.${req.url}`;
   const ext = path.extname(filePath);
