@@ -1,0 +1,250 @@
+[
+  {
+  "title":"1984", 
+  "author":"George Orwell", 
+  "pages":328, 
+  "read":true, 
+  "imageURL":"https://cdn.waterstones.com/bookjackets/large/9780/1410/9780141036144.jpg",
+  "id":"1"
+},
+{
+  "title":"Burial Rights",
+  "author":"Hannah Kent",
+  "pages":420,
+  "read":true,
+  "imageURL":"https://m.media-amazon.com/images/I/81yBp-oayWL._AC_UF894,1000_QL80_.jpg",
+  "id": "2"
+},
+{
+  "title":"The Shadow of the Wind",
+  "author":"Carlos Ruiz Zafón",
+  "pages":544,
+  "read":true,
+  "imageURL":"https://m.media-amazon.com/images/I/913DdP7RflL._AC_UF1000,1000_QL80_.jpg",
+  "id":"3"
+},
+{
+  "title":"Chess Story",
+  "author":"Stefan Zweig",
+  "pages":112,
+  "read":true,
+  "imageURL":"https://m.media-amazon.com/images/I/71I6zQJwPnL._AC_UF1000,1000_QL80_.jpg",
+  "id":"4"
+},
+{
+  "title":"Brave New World",
+  "author":"Aldous Huxley",
+  "pages":288,
+  "read":true,
+  "imageURL":"https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1575509280i/5129.jpg",
+ "id":"5"
+},
+{
+  "title":"Lord of Flies",
+  "author":"William Golding",
+  "pages":240,
+  "read":true,
+  "imageURL":"https://m.media-amazon.com/images/I/81xVnX8OodL._AC_UF1000,1000_QL80_.jpg",
+  "id":"6"
+},
+{
+  "title":"His Dark Materials Trilogy",
+  "author":"Philip Pullman",
+  "pages":1088,
+  "read":true,
+  "imageURL":"https://prodimage.images-bn.com/pimages/9780307957832_p0_v2_s600x595.jpg",
+  "id":"7"
+},
+{
+  "title":"Frankenstein",
+  "author":"Mary Shelley",
+  "pages":240,
+  "read":true,
+  "imageURL":"https://www.magicmurals.com/media/catalog/product/cache/af1e2a1566fa2dbb552605e8822354b7/a/d/adg-0000001045_1.jpg",
+  "id":"8"
+},
+{
+"title":"Confusion",
+"author":"Stefan Zweig",
+"pages":176,
+"read":true,
+"imageURL":"https://m.media-amazon.com/images/I/71+v5U30orL._AC_UF1000,1000_QL80_.jpg",
+"id":"9"
+},
+{
+  "title":"When Nietzsche Wept",
+  "author":"Irvin D. Yalom",
+  "pages":310,
+  "read":true,
+  "imageURL":"https://m.media-amazon.com/images/I/81z5b4ZHKoL._AC_UF1000,1000_QL80_.jpg",
+  "id":"10"
+},
+{
+  "title":"Girl, Woman, Other",
+  "author":"Bernardine Evaristo",
+  "pages":464,
+  "read":true,
+  "imageURL":"https://m.media-amazon.com/images/I/71TpVXA19ZL._AC_UF1000,1000_QL80_.jpg",
+  "id":"11"
+},
+{
+  "title":"When the Crawdads Sing",
+  "author":"Delia Owens",
+  "pages":384,
+  "read":true,
+  "imageURL":"https://m.media-amazon.com/images/I/81e+mSqZvnL._AC_UF894,1000_QL80_.jpg",
+  "id":"12"
+},
+{
+  "title":"The Secret History",
+  "author":"Donna Tart",
+  "pages":559,
+  "read":true,
+  "imageURL":"https://m.media-amazon.com/images/I/81YhQfeiynL.jpg",
+  "id":"13"
+},
+{
+  "title":"Love's Executioner and Other Tales of Psychotherapy",
+  "author":"Irvin D. Yalom",
+  "pages":304,
+  "read":true,
+  "imageURL":"https://m.media-amazon.com/images/I/81ciP8gyJTL._AC_UF1000,1000_QL80_.jpg",
+  "id":"14"
+},
+{
+  "title":"Animal Farm",
+  "author":"George Orwell",
+  "pages":112,
+  "read":true,
+  "imageURL":"https://m.media-amazon.com/images/I/91Lbhwt5RzL.jpg",
+  "id":"15"
+},
+{
+  "title":"Just Above my Head",
+  "author":"James Baldwin",
+  "pages":584,
+  "read":true,
+  "imageURL":"https://m.media-amazon.com/images/I/81JUgWD6xWL._AC_UF1000,1000_QL80_.jpg",
+  "id":"16"
+},
+{
+  "title":"Memoirs of a Geisha",
+  "author":"Arthur Golden",
+  "pages":503,
+  "read":true,
+  "imageURL":"https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1409595968i/929.jpg",
+  "id":"17"
+},
+{
+  "title":"The Picture of Dorian Gray",
+  "author":"Oscar Wilde",
+  "pages":272,
+  "read":true,
+  "imageURL":"https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1546103428i/5297.jpg",
+  "id":"18"
+},
+{
+  "title":"Invisible Women",
+  "author":"Caroline Criado Perez",
+  "pages":272,
+  "read":true,
+  "imageURL":"https://m.media-amazon.com/images/I/61OCni--zZL._AC_UF1000,1000_QL80_.jpg",
+  "id":"19"
+},
+{
+  "title":"Desert Flower",
+  "author":"Waris Dirie",
+  "pages":256,
+  "read":true,
+  "imageURL":"https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1439762656i/8745.jpg",
+  "id":"20"
+},
+{
+  "title":"I'll Give you the Sun",
+  "author":"Jandy Nelson",
+  "pages":371,
+  "read":true,
+  "imageURL":"https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1608612077l/20820994.jpg",
+  "id":"21"
+},
+{
+  "title":"The Song of Achilles",
+  "author":"Madeline Miller",
+  "pages":408,
+  "read":true,
+  "imageURL":"https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1357177533i/13623848.jpg",
+  "id":"22"
+},
+{
+"title":"The Seven Husbands of Evelyn Hugo",
+"author":"Taylor Jenkins Reid",
+"pages":389,
+"read":true,
+"imageURL":"https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1664458703i/32620332.jpg",
+"id":"23"
+},
+{
+"title":"The Seven Deaths of Evelyn Hardcastle",
+"author":"Stuart Turton",
+"pages":432,
+"read":true,
+"imageURL":"https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1506896221i/36337550.jpg",
+"id":"24"
+},
+{
+ "title":"Daisy Jones and The Six",
+ "author":"Taylor Jenkins Reid",
+ "pages":368,
+ "read":true,
+ "imageURL":"https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1580255154i/40597810.jpg",
+ "id":"25"
+},
+{
+"title":"Once Upon a River",
+"author":"Diane Setterfield",
+"pages":464,
+"read":true,
+"imageURL":"https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1526451355i/40130093.jpg",
+"id":"26"
+},
+{
+"title":"Circe",
+"author":"Madeline Miller",
+"pages":393,
+"read":true,
+"imageURL":"https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1565909496i/35959740.jpg",
+"id":"27"
+},
+{
+"title":"Listen, Little Man!",
+"author":"Wilhelm Reich",
+"pages":144,
+"read":true,
+"imageURL":"https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1388195203i/339387.jpg",
+"id":"28"
+},
+{
+"title":"The Prophet",
+"author":"Kahlil Gibran",
+"pages":90,
+"read":true,
+"imageURL":"https://m.media-amazon.com/images/I/61aILYFZ5DL._AC_UF894,1000_QL80_.jpg",
+"id":"29"
+},
+{
+"title":"The Kite Runner",
+"author":"Khaled Hosseini",
+"pages":517,
+"read":true,
+"imageURL":"https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1579036753i/77203.jpg",
+"id":"30"
+},
+{
+  "title":"Love in the Time of Cholera",
+  "author":"Gabriel Garcia Marquez",
+  "pages":479,
+  "read":true,
+  "imageURL":"https://m.media-amazon.com/images/I/81NtAdQ3sUL._AC_UF1000,1000_QL80_.jpg",
+  "id":"31"
+}
+]

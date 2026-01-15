@@ -126,8 +126,19 @@ function createBookCard(book) {
 
     if(!newUrl) return;
 
-    book.imageURL = newUrl;
-    img.src = newUrl;
+    fetch(`/books/${book.id}`, {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ imageURL: newUrl})
+    })
+     .then(res => res.json())
+     .then(updatedBook => {
+        img.src = updatedBook.imageURL;
+        book.imageURL = updatedBook.imageURL;
+     })
+    .catch(err => console.log("Failed to update image:", err));
 });
 
    /* const removeBtn = document.createElement("button");
@@ -286,19 +297,3 @@ commentForm.addEventListener("submit", (e) => {
 
     commentForm.reset();
 });
-
-/*fetch("/books") 
-.then(response => response.json())
-.then(books => {
-   
-    books.forEach(book => {
-        const card = document.createElement("div");
-        card.classList.add("card");
-
-        card.innerHTML = `
-        <h3>${book.title}</h3>
-        <p>${book.author}</p>`;
-        container.appendChild(card);
-    });
-}) 
-.catch(err => console.error("Fetch error:", err)); */

@@ -4,7 +4,7 @@ const path = require("path");
 const crypto = require("crypto");
 
 
-const books = [
+/*const books = [
   {
   title:"1984", 
   author:"George Orwell", 
@@ -253,8 +253,11 @@ id:crypto.randomUUID(),
   imageURL:"https://m.media-amazon.com/images/I/81NtAdQ3sUL._AC_UF1000,1000_QL80_.jpg",
   id:crypto.randomUUID(),
 },
-];
-
+];*/
+let books = JSON.parse(fs.readFileSync("books.json", "utf8"));
+function saveBooks() {
+  fs.writeFileSync("books.json", JSON.stringify(books, null, 2));
+}
 const server = http.createServer((req, res) => {
 
   
@@ -272,9 +275,22 @@ const server = http.createServer((req, res) => {
     });
 
     req.on("end", () => {
-      const newBook = JSON.parse(body);
-      books.push(newBook);
+      let parseBody;
+      try{
+        parseBody = JSON.parse(body);
 
+      } catch {
+        res.writeHead(400, {"Content-Type": "application/json"});
+        res.end(JSON.stringify({ error: "Invalid JSON"}));
+      }
+       
+      const newBook = {
+        ...parseBody,
+        id: crypto.randomUUID()
+      };
+      books.push(newBook);
+    
+       saveBooks();
       res.writeHead(201, {"Content-Type": "application/json"});
       res.end(JSON.stringify(newBook));
     });
@@ -287,7 +303,15 @@ const server = http.createServer((req, res) => {
 
       req.on("data", chunk => body += chunk.toString());
       req.on("end", () => {
-        const update = JSON.parse(body);
+        let update;
+        try {
+          update = JSON.parse(body);
+        } catch {
+          res.writeHead(400, { "Content-Type": "application/json" });
+          res.end(JSON.stringify({ error: "Invalid JSON" }));
+          return;
+        }
+
         const book = books.find(b => b.id === id);
 
         if(!book) {
@@ -295,7 +319,12 @@ const server = http.createServer((req, res) => {
           res.end(JSON.stringify({ error: "Book not found"}));
           return;
         }
-        if (update.read !== undefined) book.read = update.read;
+        if (update.read !== undefined) {
+        book.read = update.read;}
+        if(update.imageURL !== undefined) {
+          book.imageURL = update.imageURL;
+        }
+        saveBooks();
         res.writeHead(200, {"Content-Type": "application/json"});
         res.end(JSON.stringify(book));
       });
