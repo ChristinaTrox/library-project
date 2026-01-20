@@ -263,7 +263,7 @@ function saveBooks() {
 }
 
 app.use(express.json());
-app.use(express.static("_dirname"));
+app.use(express.static(path.join(__dirname)));
 
 app.get("/books", (req, res) => {
   res.json(books);
