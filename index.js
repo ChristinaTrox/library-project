@@ -1,4 +1,4 @@
-const http = require("http");
+const express = require("express");
 const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto");
@@ -254,107 +254,53 @@ id:crypto.randomUUID(),
   id:crypto.randomUUID(),
 },
 ];*/
+const app = express();
+
 let books = JSON.parse(fs.readFileSync("books.json", "utf8"));
+
 function saveBooks() {
   fs.writeFileSync("books.json", JSON.stringify(books, null, 2));
 }
-const server = http.createServer((req, res) => {
 
+app.use(express.json());
+app.use(express.static("_dirname"));
+
+app.get("/books", (req, res) => {
+  res.json(books);
+});
   
-  if (req.method === "GET" && req.url === "/books") {
-    res.writeHead(200, { "Content-Type": "application/json" });
-    res.end(JSON.stringify(books));
-    return;
-  }
-
-  if (req.method === "POST" && req.url === "/books") {
-    let body = "";
-
-    req.on("data", chunk => {
-      body += chunk.toString();
-    });
-
-    req.on("end", () => {
-      let parseBody;
-      try{
-        parseBody = JSON.parse(body);
-
-      } catch {
-        res.writeHead(400, {"Content-Type": "application/json"});
-        res.end(JSON.stringify({ error: "Invalid JSON"}));
-      }
-       
-      const newBook = {
-        ...parseBody,
-        id: crypto.randomUUID()
-      };
-      books.push(newBook);
-    
-       saveBooks();
-      res.writeHead(201, {"Content-Type": "application/json"});
-      res.end(JSON.stringify(newBook));
-    });
-       return;
-  }
-
-    if (req.method === "PATCH" && req.url.startsWith("/books")) {
-      let body = "";
-      const id = req.url.split("/")[2];
-
-      req.on("data", chunk => body += chunk.toString());
-      req.on("end", () => {
-        let update;
-        try {
-          update = JSON.parse(body);
-        } catch {
-          res.writeHead(400, { "Content-Type": "application/json" });
-          res.end(JSON.stringify({ error: "Invalid JSON" }));
-          return;
-        }
-
-        const book = books.find(b => b.id === id);
-
-        if(!book) {
-          res.writeHead(404, {"Content-Type": "application/json"});
-          res.end(JSON.stringify({ error: "Book not found"}));
-          return;
-        }
-        if (update.read !== undefined) {
-        book.read = update.read;}
-        if(update.imageURL !== undefined) {
-          book.imageURL = update.imageURL;
-        }
-        saveBooks();
-        res.writeHead(200, {"Content-Type": "application/json"});
-        res.end(JSON.stringify(book));
-      });
-      return;
-    }
- 
-
-  const filePath = req.url === "/" ? "./index.html" : `.${req.url}`;
-  const ext = path.extname(filePath);
-
-  const mimeTypes = {
-    ".html": "text/html",
-    ".css": "text/css",
-    ".js": "text/javascript",
-    ".png": "image/png",
-    ".jpg": "image/jpeg",
-    ".jpeg": "image/jpeg"
+app.post("/books", (req, res) => {
+  const newBook = {
+    ...req.body,
+    id: crypto.randomUUID()
   };
 
-  fs.readFile(filePath, (err, data) => {
-    if (err) {
-      res.writeHead(404);
-      res.end("404 - Not Found");
-    } else {
-      res.writeHead(200, { "Content-Type": mimeTypes[ext] || "application/octet-stream"});
-      res.end(data);
-    }
-  });
+  books.push(newBook);
+  saveBooks();
+  res.status(201).json(newBook);
 });
+    app.patch("/books/:id", (req, res) => {
+      const {id} = req.params;
+      const update = req.body;
 
-server.listen(3000, () => {
+      const book = books.find(b => b.id === id);
+
+      if(!book) {
+        return res.status(404).json({ error: "Book not found"});
+      }
+
+      if (update.read !== undefined) {
+        book.read = update.read;
+      }
+
+      if(update.imageURL !== undefined) {
+        book.imageURL = update.imageURL;
+      }
+
+      saveBooks();
+      res.json(book);
+    });
+       
+app.listen(3000, () => {
   console.log("Server running on http://localhost:3000");
 });
