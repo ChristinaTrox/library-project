@@ -275,6 +275,29 @@ document.getElementById("toast").addEventListener("click" , () => {
 const commentForm = document.getElementById("comment-form");
 const commentList = document.getElementById("comments-list");
 
+function loadComments() {
+    fetch("/comments")
+    .then(res => res.json())
+    .then(data => {
+        commentList.innerHTML = "";
+        data.forEach( c => {
+            const commentDiv = document.createElement("div");
+            commentDiv.classList.add("comment");
+
+            const strong = document.createElement("strong");
+            strong.textContent = c.name;
+
+            const p = document.createElement("p");
+            p.textContent = c.comment;
+
+            commentDiv.appendChild(strong);
+            commentDiv.appendChild(p);
+            commentList.appendChild(commentDiv);
+        });
+    });
+}
+loadComments();
+
 commentForm.addEventListener("submit", (e) => {
     e.preventDefault();
 
@@ -283,17 +306,20 @@ commentForm.addEventListener("submit", (e) => {
 
     if(!name || !comment) return;
 
-    const commentDiv = document.createElement("div");
-    const strong = document.createElement("strong");
-    const p = document.createElement("p");
-
-    strong.textContent = name;
-    p.textContent = comment;
-    
-    commentDiv.classList.add("comment");
-    commentDiv.appendChild(strong);
-    commentDiv.appendChild(p);
-    commentList.appendChild(commentDiv);
-
+ fetch("/comments", {
+    method: "POST",
+    headers: { "Content-Type": "application/json"},
+    body: JSON.stringify({name , comment})
+ })
+ .then(res => {
+    if (!res.ok) return res.json().then(err => {throw err});
+    return res.json();
+ })
+ .then(() => {
     commentForm.reset();
+    loadComments();
+ })
+ .catch(err => {
+    showToast(err.error || "Failed to add comment"); 
+})
 });

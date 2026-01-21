@@ -256,14 +256,18 @@ id:crypto.randomUUID(),
 ];*/
 const app = express();
 
+app.use(express.json()); 
+
 let books = JSON.parse(fs.readFileSync("books.json", "utf8"));
+let comments = JSON.parse(fs.readFileSync("comments.json", "utf8"));
 
 function saveBooks() {
   fs.writeFileSync("books.json", JSON.stringify(books, null, 2));
 }
 
-app.use(express.json());
-app.use(express.static(path.join(__dirname)));
+function saveComments() {
+  fs.writeFileSync("comments.json", JSON.stringify(comments, null, 2));
+}
 
 app.get("/books", (req, res) => {
   res.json(books);
@@ -279,17 +283,18 @@ app.post("/books", (req, res) => {
   saveBooks();
   res.status(201).json(newBook);
 });
-    app.patch("/books/:id", (req, res) => {
+
+app.patch("/books/:id", (req, res) => {
       const {id} = req.params;
       const update = req.body;
-
+      
       const book = books.find(b => b.id === id);
 
-      if(!book) {
+  if(!book)  {
         return res.status(404).json({ error: "Book not found"});
+      
       }
-
-      if (update.read !== undefined) {
+    if (update.read !== undefined) {
         book.read = update.read;
       }
 
@@ -300,13 +305,41 @@ app.post("/books", (req, res) => {
       saveBooks();
       res.json(book);
     });
-    
-    
 
-    app.get("/", (req, res) => {
+     app.get("/comments", (req, res) => {
+      res.json(comments);
+    });
+
+    app.post("/comments", (req, res) => {
+      const name = req.body.name?.trim();
+      const comment = req.body.comment?.trim();
+      if (!name || !comment) {
+        return res.status(400).json({ error:"Name and comment required"});
+      }
+      if (comment.length > 500) {
+        return res.status(400).json({ error: "Comment is too long (max 500 characters"});
+      }
+
+      const newComment = {
+        id: crypto.randomUUID(),
+        name,
+        comment,
+        createdAt: new Date()
+      };
+      
+      comments.push(newComment);
+      saveComments();
+      res.status(201).json(newComment);
+    });
+
+app.use(express.static(path.join(__dirname)));
+
+  app.get("/", (req, res) => {
       res.sendFile(path.join(__dirname, "index.html"));
     });
        
-app.listen(process.env.PORT || 3000, () => {
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, ()  => {
   console.log("Server running on http://localhost:3000");
 });
