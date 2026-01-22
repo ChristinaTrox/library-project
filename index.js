@@ -306,9 +306,23 @@ app.patch("/books/:id", (req, res) => {
       res.json(book);
     });
 
+    
+
      app.get("/comments", (req, res) => {
       res.json(comments);
     });
+
+    function escapeHTML(str) {
+      return str.replace(/[&<>""']/g, tag =>
+      ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '""': "&quot;",
+        "'": "&#39;"
+      }[tag])
+      );
+    }
 
     app.post("/comments", (req, res) => {
       const name = req.body.name?.trim();
@@ -318,6 +332,9 @@ app.patch("/books/:id", (req, res) => {
       }
       if (comment.length > 500) {
         return res.status(400).json({ error: "Comment is too long (max 500 characters"});
+      }
+      if (name.length > 50) {
+        return res.status(400).json({ error: "Name too long (max 50 chars"});
       }
 
       const newComment = {

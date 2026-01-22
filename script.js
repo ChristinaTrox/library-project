@@ -274,12 +274,14 @@ document.getElementById("toast").addEventListener("click" , () => {
 
 const commentForm = document.getElementById("comment-form");
 const commentList = document.getElementById("comments-list");
+const commentError = document.getElementById("comment-error");
 
 function loadComments() {
     fetch("/comments")
     .then(res => res.json())
     .then(data => {
         commentList.innerHTML = "";
+        
         data.forEach( c => {
             const commentDiv = document.createElement("div");
             commentDiv.classList.add("comment");
@@ -290,9 +292,14 @@ function loadComments() {
             const p = document.createElement("p");
             p.textContent = c.comment;
 
+            const time = document.createElement("small");
+            time.textContent = new Date(c.createdAt).toLocaleString();
+
             commentDiv.appendChild(strong);
             commentDiv.appendChild(p);
+            commentDiv.appendChild(time);
             commentList.appendChild(commentDiv);
+            
         });
     });
 }
@@ -304,8 +311,10 @@ commentForm.addEventListener("submit", (e) => {
     const name = document.getElementById("user-name").value.trim();
     const comment = document.getElementById("user-comment").value.trim();
 
-    if(!name || !comment) return;
-
+    if(!name || !comment){
+        showToast("Name and comment are required!");
+     return;
+}
  fetch("/comments", {
     method: "POST",
     headers: { "Content-Type": "application/json"},
